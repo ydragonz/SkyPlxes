@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
@@ -8,9 +9,12 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private GameObject creditos;
     [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject botaoMusica;
+    [SerializeField] private Sprite musicaDesligada;
+    [SerializeField] private Sprite musicaLigada;
 
     public void Jogar() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainScene");
 
     }
 
@@ -31,8 +35,12 @@ public class MainMenuController : MonoBehaviour
     public void ToggleMusic() {
         if (AudioListener.volume == 0) {
             AudioListener.volume = 1;
+            botaoMusica.GetComponent<Image>().sprite = musicaLigada;
+            
+            
         } else {
             AudioListener.volume = 0;
+            botaoMusica.GetComponent<Image>().sprite = musicaDesligada;
         }
     }
 }
