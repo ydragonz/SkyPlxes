@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public Slider healthSlider;
     public GameObject explosionSoundPrefab;
+    public AudioSource dmgSound;
+    public TextMeshProUGUI healthText;
 
 
     // Start is called before the first frame update
@@ -21,13 +24,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         healthSlider.value = health;
+        healthText.text = health.ToString()+"/"+healthSlider.maxValue.ToString();
     }
 
     
 
     void OnTriggerEnter(Collider other)
     {   
-        if(other.gameObject.tag == "Cenario")
+        if(other.gameObject.tag == "Cenario" || other.gameObject.tag == "Barrier")
         {
             Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "EnemySmallBullet")
         {
             health -= 10f;
+            dmgSound.Play();
             Destroy(other.gameObject);
             if(health <= 0)
             {
