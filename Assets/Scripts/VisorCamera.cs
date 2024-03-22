@@ -37,7 +37,7 @@ public  class VisorCamera : MonoBehaviour
             GameObject novaBala = Instantiate(bala, cano.position, cano.rotation);
 
             //ajusta a rotaçã da bala, nem sempre é nescessario usar
-            novaBala.transform.Rotate(90,0,0);
+            novaBala.transform.Rotate(180,0,0);
 
             //destroy a balapara ajuste da ememoria
             Destroy(novaBala, 5);
