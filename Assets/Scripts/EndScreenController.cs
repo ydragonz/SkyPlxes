@@ -13,7 +13,7 @@ public class EndScreenController : MonoBehaviour
     }
 
     public void Quit() {
-        Application.Quit();
+        SceneManager.LoadScene("Menu");
     }
 
 
