@@ -13,6 +13,7 @@ public class TowerController : MonoBehaviour
     public Slider healthSlider;
     public TextMeshProUGUI healthText;
     public Image targetImage;
+    public bool isHit;
 
 
 
@@ -39,6 +40,7 @@ public class TowerController : MonoBehaviour
         if(other.gameObject.tag == "PlayerBullet")
         {
             health -= 5f;
+            isHit = true;
 
         }
         if(other.gameObject.tag == "PlayerMissile")
