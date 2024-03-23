@@ -6,12 +6,13 @@ using TMPro;
 
 public class TowerController : MonoBehaviour
 {
-    public float health = 1f;
+    public float health = 500f;
 
     //public Slider healthSlider;
     public GameObject explosionSoundPrefab;
     public Slider healthSlider;
     public TextMeshProUGUI healthText;
+    public Image targetImage;
 
 
 
@@ -24,7 +25,9 @@ public class TowerController : MonoBehaviour
         if(health <= 0)
         {
             Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
+            targetImage.enabled = false;
             Destroy(gameObject);
+            
         }
     }
 
@@ -35,12 +38,12 @@ public class TowerController : MonoBehaviour
 
         if(other.gameObject.tag == "PlayerBullet")
         {
-            health -= 1f;
+            health -= 5f;
 
         }
         if(other.gameObject.tag == "PlayerMissile")
         {
-            health -= 50f;
+            health -= 250f;
 
         }
         

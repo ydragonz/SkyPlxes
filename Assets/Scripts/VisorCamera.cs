@@ -4,6 +4,7 @@ public  class VisorCamera : MonoBehaviour
 {
     [SerializeField] private Transform targetAviao;
     [SerializeField] private float velocidadeVisor;
+    [SerializeField] private Transform pivot;
 
     //PUBLIC VARIABLES
     public float velocidadeBala = 100f;
@@ -25,7 +26,7 @@ public  class VisorCamera : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(directionTarget);
 
         //olha o objeto de forma suave
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, velocidadeVisor * Time.deltaTime);
+        pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, velocidadeVisor * Time.deltaTime);
 
         //incrmente o tempo do tiro
         tempo += Time.deltaTime;

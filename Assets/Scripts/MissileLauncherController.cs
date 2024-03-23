@@ -12,7 +12,7 @@ public class MissileLauncherController : MonoBehaviour
     public float intervalo = 0.1f;
     public float forcaBala = 2f;
     public float ultimateMeter = 0f;
-    public float ultimateMax = 10000f;
+    public float ultimateMax = 0f;
 
     public AudioSource somTiro;
     public Slider ultimateSlider;
@@ -21,14 +21,14 @@ public class MissileLauncherController : MonoBehaviour
 
     void Start()
     {
-        
+        ultimateMax = ultimateSlider.maxValue;
     }
 
     private void Update()
     {
         if(ultimateMeter<=ultimateMax)
         {
-            ultimateMeter++;
+            ultimateMeter+=Time.deltaTime;
             ultimateSlider.value = ultimateMeter;
         }
 

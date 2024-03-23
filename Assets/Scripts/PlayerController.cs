@@ -34,12 +34,13 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Cenario" || other.gameObject.tag == "Barrier")
         {
             Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
+            health = 0;
             Destroy(gameObject);
             Invoke("LoadGameOverScene", 2.0f);
         }
         if(other.gameObject.tag == "EnemySmallBullet")
         {
-            health -= 10f;
+            health -= 2f;
             dmgSound.Play();
             Destroy(other.gameObject);
             if(health <= 0)
