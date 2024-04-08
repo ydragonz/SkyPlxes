@@ -9,7 +9,15 @@ public class MissileController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        if (other.tag == "EnemySmallBullet")
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.tag == "Enemy")
+        {
+            Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+        
     }
 }

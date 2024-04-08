@@ -14,6 +14,7 @@ public class TowerController : MonoBehaviour
     public TextMeshProUGUI healthText;
     public Image targetImage;
     public bool isHit;
+    public bool isCriticalHit;
 
 
 
@@ -46,7 +47,8 @@ public class TowerController : MonoBehaviour
         if(other.gameObject.tag == "PlayerMissile")
         {
             health -= 250f;
-
+            isHit = true;
+            isCriticalHit = true;
         }
         
         

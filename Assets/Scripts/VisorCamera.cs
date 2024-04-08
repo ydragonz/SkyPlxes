@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public  class VisorCamera : MonoBehaviour
 {
@@ -12,9 +13,47 @@ public  class VisorCamera : MonoBehaviour
     public Transform cano;
     public float intervalo = 0.1f;
     public float forçaBala = 2f;
+    public float downTime = 2f;
+    public float downInterval = 5f;
 
-    //PRIVATE VARIABLES
     private float tempo;
+    private bool canShoot = false;
+
+    private void Start()
+    {
+        StartCoroutine(StartShooting());
+    }
+
+    private IEnumerator StartShooting()
+    {
+        yield return new WaitForSeconds(4.0f);
+        canShoot = true;
+        while (true)
+        {
+            yield return new WaitForSeconds(downInterval);
+            canShoot = false;
+
+            StartCoroutine(RotateDown());
+            yield return new WaitForSeconds(downTime);
+            canShoot = true;
+        }
+    }
+    private IEnumerator RotateDown()
+    {
+        float elapsedTime = 0;
+        float rotateTime = 1f; // Adjust this to change the speed of rotation
+        Quaternion startingRotation = pivot.rotation;
+        Quaternion targetRotation = Quaternion.Euler(45, 0, 0); // Adjust this to the target rotation
+
+        while (elapsedTime < rotateTime)
+        {
+            pivot.rotation = Quaternion.Lerp(startingRotation, targetRotation, elapsedTime / rotateTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        pivot.rotation = targetRotation;
+    }
 
     private void Update()
     {
@@ -32,7 +71,7 @@ public  class VisorCamera : MonoBehaviour
         tempo += Time.deltaTime;
 
         //verifica se o tempo decorrido é maior ou menor que o intervalo do termpo do tiro
-        if(tempo >= intervalo)
+        if(tempo >= intervalo && canShoot)
         {
             //instancia a bala pelo cano da metralhadora
             GameObject novaBala = Instantiate(bala, cano.position, cano.rotation);
@@ -53,4 +92,5 @@ public  class VisorCamera : MonoBehaviour
             tempo = 0f;
         }
     }
+    
 }

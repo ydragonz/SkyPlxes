@@ -43,4 +43,5 @@ public class MainMenuController : MonoBehaviour
             botaoMusica.GetComponent<Image>().sprite = musicaDesligada;
         }
     }
+    
 }

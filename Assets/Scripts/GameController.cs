@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,12 +13,14 @@ public class GameController : MonoBehaviour
     public float score;
     public float scoreMultiplier = 1.0f;
     public TextMeshProUGUI scoreText;
+    public Image fadeImage;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fadeImage.canvasRenderer.SetAlpha(1.0f); // Set opacity to 100%
+        fadeImage.CrossFadeAlpha(0.0f, 2.0f, false);
     }
 
     // Update is called once per frame
@@ -38,10 +41,18 @@ public class GameController : MonoBehaviour
         } else {
             if(enemy.isHit)
             {
-                score += 10 * scoreMultiplier;
+                if(enemy.isCriticalHit)
+                {
+                    score += 500 * scoreMultiplier;
+                    enemy.isCriticalHit = false;
+                }
+                else
+                {
+                    score += 10 * scoreMultiplier;
+                }
                 scoreMultiplier += 0.1f;
                 enemy.isHit = false;
-            }
+            }                   
         }
         scoreText.text = score.ToString();
     }
