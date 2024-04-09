@@ -62,12 +62,15 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Calcula a posição desejada
-        Vector3 desiredPosition = player.position - transform.forward * offset.magnitude;
-        desiredPosition += transform.up * offset.y;
+        if (player != null)
+        {
+            // Calcula a posição desejada
+            Vector3 desiredPosition = player.position - transform.forward * offset.magnitude;
+            desiredPosition += transform.up * offset.y;
 
-        // Interpola suavemente entre a posição atual da câmera e a posição desejada
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
+            // Interpola suavemente entre a posição atual da câmera e a posição desejada
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
+        }
 
         // Faz a câmera olhar para o inimigo
         if (enemy != null)

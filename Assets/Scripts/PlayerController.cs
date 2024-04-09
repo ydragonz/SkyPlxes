@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
             health = 0;
 
             Destroy(gameObject);
-            Invoke("LoadGameOverScene", 2.0f);
 
         }
         if(other.gameObject.tag == "EnemySmallBullet")
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour
             {
                 Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
-                Invoke("LoadGameOverScene", 2.0f);
             }
         }
         

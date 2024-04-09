@@ -57,15 +57,18 @@ public  class VisorCamera : MonoBehaviour
 
     private void Update()
     {
-        //calcula a distancia entre objeto e camera
-        Vector3 directionTarget= targetAviao.position - transform.position;
-        Debug.Log(directionTarget);
+        if (targetAviao != null)
+        {
+            //calcula a distancia entre objeto e camera
+            Vector3 directionTarget= targetAviao.position - transform.position;
+            Debug.Log(directionTarget);
 
-        //calcula a rotacao para olhar para o objeto
-        Quaternion targetRotation = Quaternion.LookRotation(directionTarget);
+            //calcula a rotacao para olhar para o objeto
+            Quaternion targetRotation = Quaternion.LookRotation(directionTarget);
 
-        //olha o objeto de forma suave
-        pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, velocidadeVisor * Time.deltaTime);
+            //olha o objeto de forma suave
+            pivot.rotation = Quaternion.Slerp(pivot.rotation, targetRotation, velocidadeVisor * Time.deltaTime);
+        }   
 
         //incrmente o tempo do tiro
         tempo += Time.deltaTime;
